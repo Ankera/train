@@ -1,4 +1,4 @@
 server:
-  port: 8181
+  port: 8080
   servlet:
     context-path: /member

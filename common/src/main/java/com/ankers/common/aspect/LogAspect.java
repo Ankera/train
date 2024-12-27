@@ -62,7 +62,8 @@ public class LogAspect {
         }
 
         // 排除字段，敏感字国或太长的字段不显示：身份证、手机号、邮箱、密码等
-        String[] excludeProperties = {"mobile"};
+//        String[] excludeProperties = {"mobile"};
+        String[] excludeProperties = {};
         PropertyPreFilters filters = new PropertyPreFilters();
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);
@@ -75,7 +76,7 @@ public class LogAspect {
         Object result = joinPoint.proceed();
 
         // 摧除字段，敏感字段或太长的字殿不显示：身份证、手机号、邮箱、密码等
-        String[] excludeProperties = {"mobile"};
+        String[] excludeProperties = {};
         PropertyPreFilters filters = new PropertyPreFilters();
         PropertyPreFilters.MySimplePropertyPreFilter excludeFilter = filters.addFilter();
         excludeFilter.addExcludes(excludeProperties);

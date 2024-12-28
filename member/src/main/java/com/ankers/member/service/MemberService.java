@@ -1,5 +1,6 @@
 package com.ankers.member.service;
 
+import com.ankers.common.util.SnowUtil;
 import com.ankers.member.domain.Member;
 import com.ankers.member.mapper.MemberMapper;
 import com.ankers.member.req.MemberRegisterReq;
@@ -18,7 +19,7 @@ public class MemberService {
 
     public long register(MemberRegisterReq mobile) {
         Member member = new Member();
-        member.setId(System.currentTimeMillis());
+        member.setId(SnowUtil.getSnowflakeNextId());
         member.setMobile(mobile.getMobile());
         memberMapper.insert(member);
         return member.getId();

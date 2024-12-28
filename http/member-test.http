@@ -6,7 +6,7 @@ token: 123
 POST http://localhost:8080/member/member/register
 Content-Type: application/x-www-form-urlencoded
 
-mobile=
+mobile=12345675
 
 ###
 POST http://localhost:8080/member/member/send-code

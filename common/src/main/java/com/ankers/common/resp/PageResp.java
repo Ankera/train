@@ -1,4 +1,4 @@
-package com.ankers.common.req;
+package com.ankers.common.resp;
 
 import java.io.Serializable;
 import java.util.List;

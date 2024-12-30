@@ -2,7 +2,7 @@ package com.ankers.member.controller;
 
 import com.ankers.common.context.LoginMemberContext;
 import com.ankers.common.resp.CommonResp;
-import com.ankers.common.req.PageResp;
+import com.ankers.common.resp.PageResp;
 import com.ankers.member.req.PassengerQueryReq;
 import com.ankers.member.req.PassengerSaveReq;
 import com.ankers.member.resp.PassengerQueryResp;
@@ -29,5 +29,11 @@ public class PassengerController {
         req.setMemberId(LoginMemberContext.getId());
         PageResp<PassengerQueryResp> list = passengerService.queryList(req);
         return new CommonResp<>(list);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public CommonResp<Object> delete(@PathVariable Long id) {
+        passengerService.delete(id);
+        return new CommonResp<>();
     }
 }

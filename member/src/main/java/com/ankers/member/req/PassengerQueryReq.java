@@ -1,8 +1,8 @@
 package com.ankers.member.req;
 
-import com.ankers.common.resp.CommonResp;
+import com.ankers.common.req.PageReq;
 
-public class PassengerQueryReq extends CommonResp.PageReq {
+public class PassengerQueryReq extends PageReq {
     private Long memberId;
 
     public Long getMemberId() {

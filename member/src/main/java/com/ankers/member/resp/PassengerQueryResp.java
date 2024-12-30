@@ -9,7 +9,7 @@ import java.util.Date;
 public class PassengerQueryResp {
 
     /**
-     * id
+     * id 转字符串 解决精度丢失的问题
      */
     @JsonSerialize(using= ToStringSerializer.class)
     private Long id;

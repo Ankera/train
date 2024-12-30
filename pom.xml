@@ -68,11 +68,11 @@
                 <version>8.0.32</version>
             </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>com.github.pagehelper</groupId>-->
-<!--                <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--                <version>1.4.6</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>1.4.6</version>
+            </dependency>
 
             <!-- spring cloud alibaba  https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E
             https://github.com/alibaba/spring-cloud-alibaba/blob/2022.x/README-zh.md

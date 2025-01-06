@@ -3,6 +3,7 @@ package com.ankers.member.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.ankers.common.context.LoginMemberContext;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ankers.common.resp.PageResp;
@@ -32,6 +33,7 @@ public class PassengerService {
         DateTime now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(req, Passenger.class);
         if (ObjectUtil.isNull(passenger.getId())) {
+            passenger.setMemberId(LoginMemberContext.getId());
             passenger.setId(SnowUtil.getSnowflakeNextId());
             passenger.setCreateTime(now);
             passenger.setUpdateTime(now);

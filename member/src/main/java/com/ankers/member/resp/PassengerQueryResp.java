@@ -1,15 +1,14 @@
 package com.ankers.member.resp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PassengerQueryResp {
 
     /**
-     * id 转字符串 解决精度丢失的问题
+     * id
      */
     @JsonSerialize(using= ToStringSerializer.class)
     private Long id;

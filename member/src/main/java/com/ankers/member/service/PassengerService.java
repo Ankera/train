@@ -5,7 +5,6 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ankers.common.context.LoginMemberContext;
 import com.ankers.common.resp.PageResp;
 import com.ankers.common.util.SnowUtil;
 import com.ankers.member.domain.Passenger;
@@ -33,7 +32,6 @@ public class PassengerService {
         DateTime now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(req, Passenger.class);
         if (ObjectUtil.isNull(passenger.getId())) {
-            passenger.setMemberId(LoginMemberContext.getId());
             passenger.setId(SnowUtil.getSnowflakeNextId());
             passenger.setCreateTime(now);
             passenger.setUpdateTime(now);
@@ -48,25 +46,20 @@ public class PassengerService {
         PassengerExample passengerExample = new PassengerExample();
         passengerExample.setOrderByClause("id desc");
         PassengerExample.Criteria criteria = passengerExample.createCriteria();
-        Long memberId = req.getMemberId();
-        if (ObjectUtil.isNotNull(req.getMemberId())) {
-            criteria.andMemberIdEqualTo(memberId);
-        }
 
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
-
         PageHelper.startPage(req.getPage(), req.getSize());
-        List<Passenger> passengers = passengerMapper.selectByExample(passengerExample);
+        List<Passenger> passengerList = passengerMapper.selectByExample(passengerExample);
 
-        PageInfo<Passenger> pageInfo = new PageInfo<>(passengers);
+        PageInfo<Passenger> pageInfo = new PageInfo<>(passengerList);
         LOG.info("总行数：{}", pageInfo.getTotal());
         LOG.info("总页数：{}", pageInfo.getPages());
 
+        List<PassengerQueryResp> list = BeanUtil.copyToList(passengerList, PassengerQueryResp.class);
+
         PageResp<PassengerQueryResp> pageResp = new PageResp<>();
         pageResp.setTotal(pageInfo.getTotal());
-
-        List<PassengerQueryResp> list = BeanUtil.copyToList(passengers, PassengerQueryResp.class);
         pageResp.setList(list);
         return pageResp;
     }

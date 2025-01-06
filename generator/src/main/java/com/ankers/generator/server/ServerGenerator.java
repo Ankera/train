@@ -1,5 +1,6 @@
 package com.ankers.generator.server;
 
+import com.ankers.generator.util.FreemarkerUtil;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
@@ -10,12 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ServerGenerator {
-    static String toPath = "generator/src/main/java/com/ankers/generator/test/";
+    static String serverPath = "[module]/src/main/java/com/ankers/[module]/service/";
     static String pomPath = "generator/pom.xml";
+    static String module = "";
 
-    static {
-        new File(toPath).mkdirs();
-    }
+//    static {
+//        new File(toPath).mkdirs();
+//    }
 
 //    public static void main(String[] args) throws Exception {
 //        FreemarkerUtil.initConfig("test.ftl");
@@ -25,18 +27,39 @@ public class ServerGenerator {
 //    }
 
     public static void main(String[] args) throws Exception {
-        String str = getGeneratorPath();
+        String generatorPath = getGeneratorPath();
 
-        Document document = new SAXReader().read(new File("generator/" + str));
+        module = generatorPath.replace("src/main/resources/generator-config-", "").replace(".xml", "");
+        System.out.println("module==: " + module);
+        serverPath = serverPath.replace("[module]", module);
+        new File(serverPath).mkdirs();
+        System.out.println("servicePath==: " + serverPath);
+
+        Document document = new SAXReader().read(new File("generator/" + generatorPath));
+
         Node table = document.selectSingleNode("//table");
         // 查询属性
         Node tableName = table.selectSingleNode("@tableName");
         Node domainObjectName = table.selectSingleNode("@domainObjectName");
 
-        System.out.println("****************************");
-        System.out.println(table.detach());
-        System.out.println(tableName.getText());
-        System.out.println(domainObjectName.getText());
+        // 示例：表名 ankers_test
+        // Domain = ankersTest
+        String Domain = domainObjectName.getText();
+        // domain = ankersTest
+        String domain = Domain.substring(0, 1).toLowerCase() + Domain.substring(1);
+        // do_main = ankers-test
+        String do_main = tableName.getText().replaceAll("_", "-");
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("module", module);
+        param.put("Domain", Domain);
+        param.put("domain", domain);
+        param.put("do_main", do_main);
+
+        System.out.println("组装参数：" + param);
+
+        FreemarkerUtil.initConfig("service.ftl");
+        FreemarkerUtil.generator(serverPath + Domain + "Service.java", param);
     }
 
     private static String getGeneratorPath() throws DocumentException {

@@ -21,12 +21,11 @@ public class PassengerController {
     @PostMapping("/save")
     public CommonResp<Object> save(@Valid @RequestBody PassengerSaveReq req) {
         passengerService.save(req);
-        return new CommonResp<>(true, "订票人插入成功", null);
+        return new CommonResp<>();
     }
 
     @GetMapping("/query-list")
     public CommonResp<PageResp<PassengerQueryResp>> queryList(@Valid PassengerQueryReq req) {
-        req.setMemberId(LoginMemberContext.getId());
         PageResp<PassengerQueryResp> list = passengerService.queryList(req);
         return new CommonResp<>(list);
     }
@@ -36,4 +35,5 @@ public class PassengerController {
         passengerService.delete(id);
         return new CommonResp<>();
     }
+
 }

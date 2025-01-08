@@ -1,0 +1,4 @@
+###
+GET http://localhost:8080/business/test
+Accept: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MzYyNjQ2NTUsIm1vYmlsZSI6IjEzMDAwMDAwMDAwIiwiaWQiOjE4NzMwMTM5MjkyNDA4MjU4NTYsImV4cCI6MTczNjM1MTA1NSwiaWF0IjoxNzM2MjY0NjU1fQ.D26FXss1s363ZxzJQ9Bao0Sc3jonWzaN5gQPDDNfaoI

@@ -1,5 +1,6 @@
 package com.ankers.business.controller.admin;
 
+import com.ankers.business.resp.TrainQueryResp;
 import com.ankers.common.resp.CommonResp;
 import com.ankers.common.resp.PageResp;
 import com.ankers.business.req.StationQueryReq;
@@ -9,6 +10,8 @@ import com.ankers.business.service.StationService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/station")
@@ -35,4 +38,9 @@ public class StationAdminController {
         return new CommonResp<>();
     }
 
+    @GetMapping("/query-all")
+    public CommonResp<List<StationQueryResp>> queryList() {
+        List<StationQueryResp> list = stationService.queryAll();
+        return new CommonResp<>(list);
+    }
 }

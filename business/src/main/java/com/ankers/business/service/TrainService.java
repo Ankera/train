@@ -1,8 +1,11 @@
 package com.ankers.business.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.ankers.common.exception.BusinessException;
+import com.ankers.common.exception.BusinessExceptionEnum;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ankers.common.resp.PageResp;
@@ -32,6 +35,13 @@ public class TrainService {
         DateTime now = DateTime.now();
         Train train = BeanUtil.copyProperties(req, Train.class);
         if (ObjectUtil.isNull(train.getId())) {
+
+            // 保存之前，先校验唯一键是否存在
+            Train stationDB = selectByUnique(req.getCode());
+            if (ObjectUtil.isNotEmpty(stationDB)) {
+                throw new BusinessException(BusinessExceptionEnum.BUSINESS_TRAIN_CODE_UNIQUE_ERROR);
+            }
+
             train.setId(SnowUtil.getSnowflakeNextId());
             train.setCreateTime(now);
             train.setUpdateTime(now);
@@ -40,6 +50,17 @@ public class TrainService {
             train.setUpdateTime(now);
             trainMapper.updateByPrimaryKey(train);
         }
+    }
+
+    public Train selectByUnique(String code) {
+        TrainExample example = new TrainExample();
+        TrainExample.Criteria criteria = example.createCriteria();
+        criteria.andCodeEqualTo(code);
+        List<Train> trains = trainMapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(trains)) {
+            return trains.get(0);
+        }
+        return null;
     }
 
     public PageResp<TrainQueryResp> queryList(TrainQueryReq req) {

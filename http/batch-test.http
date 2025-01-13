@@ -1,0 +1,4 @@
+###
+GET http://localhost:8080/batch/test
+Accept: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MzYyNjU2NTUsIm1vYmlsZSI6IjEzMDAwMDAwMDAwIiwiaWQiOjE4NzMwMTM5MjkyNDA4MjU4NTYsImV4cCI6MTczNjM1MjA1NSwiaWF0IjoxNzM2MjY1NjU1fQ.57ILCBQdswQaqx1-RICCiFmdIU0G46nUtQ6utBzYbmY

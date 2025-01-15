@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-public class DailyTrainQueryReq extends PageReq {
+public class DailyTrainCarriageQueryReq extends PageReq {
 
     /**
      * get 请求用 DateTimeFormat
@@ -14,7 +14,7 @@ public class DailyTrainQueryReq extends PageReq {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    private String code;
+    private String trainCode;
 
     public Date getDate() {
         return date;
@@ -24,13 +24,11 @@ public class DailyTrainQueryReq extends PageReq {
         this.date = date;
     }
 
-    public String getCode() {
-        return code;
+    public String getTrainCode() {
+        return trainCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setTrainCode(String trainCode) {
+        this.trainCode = trainCode;
     }
-
-
 }

@@ -1,5 +1,8 @@
 # train
 
+## 示意图
+![img_3.png](img_3.png)
+
 ## 架构图
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)

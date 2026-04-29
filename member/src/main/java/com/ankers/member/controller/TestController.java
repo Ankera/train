@@ -1,13 +1,19 @@
 package com.ankers.member.controller;
 
+import com.ankers.member.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
 
-    @GetMapping("/test")
+    @Autowired
+    private MemberService memberService;
+
+    @GetMapping("/hello")
     public String hello() {
-        return "hello world";
+        int count = memberService.count();
+        return "hello world => " + count;
     }
 }

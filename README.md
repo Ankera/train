@@ -1,5 +1,9 @@
 # train
 
+## 架构图
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+
 ## 数据库 dtd
 ```text
 https://gitee.com/3siants/mybatis-generator

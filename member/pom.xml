@@ -71,8 +71,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.ankers.train.TrainApplication</mainClass>
-                    <skip>true</skip>
+                    <mainClass>com.ankers.member.config.MemberApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

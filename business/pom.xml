@@ -34,6 +34,16 @@
             <artifactId>spring-cloud-loadbalancer</artifactId>
         </dependency>
 
+        <!-- 使用 Caffeine 优化 Spring Cloud LoadBalancer 缓存，避免生产环境使用默认缓存 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -99,8 +109,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.ankers.train.TrainApplication</mainClass>
-                    <skip>true</skip>
+                    <mainClass>com.ankers.business.config.BusinessApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

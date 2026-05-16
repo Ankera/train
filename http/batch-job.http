@@ -55,11 +55,22 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/batch/admin/job/add
+Content-Type: application/json
+
+{
+"name": "com.ankers.batch.job.DailyTrainJob",
+"group": "DEFAULT",
+"cronExpression": "0 0 0 * * ?",
+"description": "每日生成车次"
+}
+
+###
 
 POST http://localhost:8080/batch/admin/job/run
 Content-Type: application/json
 
 {
   "name": "com.ankers.batch.job.DailyTrainJob",
-  "jobGroupName": "default"
+  "group": "default"
 }

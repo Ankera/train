@@ -44,12 +44,8 @@ public class DailyTrainSeatService {
 
     public PageResp<DailyTrainSeatQueryResp> queryList(DailyTrainSeatQueryReq req) {
         DailyTrainSeatExample dailyTrainSeatExample = new DailyTrainSeatExample();
-        dailyTrainSeatExample.setOrderByClause("train_code asc, carriage_index asc, carriage_seat_index asc");
+        dailyTrainSeatExample.setOrderByClause("id desc");
         DailyTrainSeatExample.Criteria criteria = dailyTrainSeatExample.createCriteria();
-
-        if (ObjectUtil.isNotEmpty(req.getTrainCode())) {
-            criteria.andTrainCodeEqualTo(req.getTrainCode());
-        }
 
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());

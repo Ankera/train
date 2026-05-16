@@ -2,6 +2,7 @@ package com.ankers.batch.controller;
 import com.ankers.batch.req.CronJobReq;
 import com.ankers.batch.resp.CronJobResp;
 import com.ankers.common.resp.CommonResp;
+import io.micrometer.common.util.StringUtils;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.impl.triggers.CronTriggerImpl;
@@ -30,6 +31,14 @@ public class JobController {
     public CommonResp<Object> run(@RequestBody CronJobReq cronJobReq) throws SchedulerException {
         String jobClassName = cronJobReq.getName();
         String jobGroupName = cronJobReq.getGroup();
+        if (StringUtils.isBlank(jobClassName)) {
+            return new CommonResp<>("参数错误：name 不能为空");
+        }
+
+        // 如果 group 为空，默认用 DEFAULT
+        if (StringUtils.isBlank(jobGroupName)) {
+            jobGroupName = Scheduler.DEFAULT_GROUP;  // "DEFAULT"
+        }
         LOG.info("手动执行任务开始：{}, {}", jobClassName, jobGroupName);
         schedulerFactoryBean.getScheduler().triggerJob(JobKey.jobKey(jobClassName, jobGroupName));
         return new CommonResp<>();

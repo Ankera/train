@@ -22,8 +22,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DailyTrainService {
@@ -35,6 +37,9 @@ public class DailyTrainService {
 
     @Resource
     private TrainService trainService;
+
+    @Resource
+    private DailyTrainStationService dailyTrainStationService;
 
     public void save(DailyTrainSaveReq req) {
         DateTime now = DateTime.now();
@@ -98,7 +103,8 @@ public class DailyTrainService {
 
         for (Train train : trainList) {
 //            System.out.println("== code ==" + train.getCode());
-            if (train.getCode().equals("D1")) {
+            Set<String> codes = Set.of("D1", "D10");
+            if (codes.contains(train.getCode())) {
                 genDailyTrain(date, train);
             }
         }
@@ -124,7 +130,7 @@ public class DailyTrainService {
         dailyTrainMapper.insert(dailyTrain);
 
         // 生成该车次的车站数据
-//        dailyTrainStationService.genDaily(date, train.getCode());
+        dailyTrainStationService.genDaily(date, train.getCode());
 //
 //        // 生成该车次的车厢数据
 //        dailyTrainCarriageService.genDaily(date, train.getCode());

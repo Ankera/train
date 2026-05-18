@@ -47,6 +47,9 @@ public class DailyTrainService {
     @Resource
     private DailyTrainSeatService dailyTrainSeatService;
 
+    @Resource
+    private DailyTrainTicketService dailyTrainTicketService;
+
     public void save(DailyTrainSaveReq req) {
         DateTime now = DateTime.now();
         DailyTrain dailyTrain = BeanUtil.copyProperties(req, DailyTrain.class);
@@ -108,9 +111,9 @@ public class DailyTrainService {
         }
 
         for (Train train : trainList) {
-//            System.out.println("== code ==" + train.getCode());
             Set<String> codes = Set.of("D1", "D10");
             if (codes.contains(train.getCode())) {
+                System.out.println("== code ==" + train.getCode());
                 genDailyTrain(date, train);
             }
         }
@@ -145,7 +148,7 @@ public class DailyTrainService {
         dailyTrainSeatService.genDaily(date, train.getCode());
 //
 //        // 生成该车次的余票数据
-//        dailyTrainTicketService.genDaily(dailyTrain, date, train.getCode());
+        dailyTrainTicketService.genDaily(dailyTrain, date, train.getCode());
 //
 //        // 生成令牌余量数据
 //        skTokenService.genDaily(date, train.getCode());

@@ -133,11 +133,11 @@ public class DailyTrainTicketService {
                 dailyTrainTicket.setStart(trainStationStart.getName());
                 dailyTrainTicket.setStartPinyin(trainStationStart.getNamePinyin());
                 dailyTrainTicket.setStartTime(trainStationStart.getOutTime());
-                dailyTrainTicket.setStartIndex(trainStationStart.getIndex());
+                dailyTrainTicket.setStartIndex(i);
                 dailyTrainTicket.setEnd(trainStationEnd.getName());
                 dailyTrainTicket.setEndPinyin(trainStationEnd.getNamePinyin());
                 dailyTrainTicket.setEndTime(trainStationEnd.getInTime());
-                dailyTrainTicket.setEndIndex(trainStationEnd.getIndex());
+                dailyTrainTicket.setEndIndex(j);
                 int ydz = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.YDZ.getCode());
                 int edz = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.EDZ.getCode());
                 int rw = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.RW.getCode());

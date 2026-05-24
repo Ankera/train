@@ -365,6 +365,15 @@ public class ConfirmOrderService {
     private boolean calSell(DailyTrainSeat dailyTrainSeat, Integer startIndex, Integer endIndex) {
         // 00001, 00000
         String sell = dailyTrainSeat.getSell();
+        if (StrUtil.isBlank(sell)
+                || ObjectUtil.hasEmpty(startIndex, endIndex)
+                || startIndex < 0
+                || endIndex > sell.length()
+                || startIndex >= endIndex) {
+            LOG.error("座位销售数据异常，座位ID：{}，sell：{}，startIndex：{}，endIndex：{}",
+                    dailyTrainSeat.getId(), sell, startIndex, endIndex);
+            throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_SEAT_SELL_ERROR);
+        }
         //  000, 000
         String sellPart = sell.substring(startIndex, endIndex);
         if (Integer.parseInt(sellPart) > 0) {
